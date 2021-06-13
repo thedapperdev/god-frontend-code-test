@@ -19,7 +19,8 @@ const Home: any = () => {
         naturalSlideWidth={100}
         naturalSlideHeight={125}
         visibleSlides={4}
-        totalSlides={carsData.length}>
+        totalSlides={carsData.length}
+        step={4}>
           <Slider>
           {carsData.map((c, i) => {
             return (<Slide index={i}>
@@ -27,6 +28,8 @@ const Home: any = () => {
             </Slide>)
           })}
           </Slider>
+          <ButtonBack>Back</ButtonBack>
+        <ButtonNext>Next</ButtonNext>
       </CarouselProvider>
       
 
