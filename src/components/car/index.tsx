@@ -2,7 +2,10 @@ import React from 'react';
 import H1 from '../H1';
 
 // @ts-ignore
-import { Text, useTheme } from 'vcc-ui';
+import { Text, useTheme, Link, Spacer, View } from 'vcc-ui';
+// @ts-ignore
+import styled from 'styled-components';
+
 export interface Props {
   id?: string
   modelName: string
@@ -16,7 +19,7 @@ const H2 = (props: any) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   return <Text as='h2' extend={{
       color: theme.color.foreground.secondary,
-      fontWeight: '400 !important'
+      fontWeight: '400 !important',
       }}>
     {props.children}
   </Text>
@@ -26,7 +29,8 @@ const H3 = (props: any) => {
   return <Text as='h3' extend={{
       textTransform: 'uppercase',
       color: theme.color.foreground.secondary,
-      fontWeight: '500 !important' }}>
+      fontWeight: '500 !important',
+      textAlign: 'left' }}>
     {props.children}
   </Text>
 };
@@ -36,12 +40,27 @@ const Car: React.FC<Props> = (props: Props) => {
   const altText = `${props.modelName} ${props.modelType} ${props.bodyType}`;
 
   return (
-    <>
+    <View justifyContent='flex-start'>
       <H3>{props.bodyType}</H3>
-      <H1>{props.modelName}</H1>
-      <H2>{props.modelType}</H2>
-      <img src={props.imageUrl} alt={altText} />
-    </>
+      <View direction='row' alignItems='center'>
+        <H1>{props.modelName}</H1>
+        <Spacer />
+        <H2>{props.modelType}</H2>
+      </View>
+      <Spacer />
+      <View >
+        <img src={props.imageUrl} alt={altText} />
+      </View>
+      <View direction='row' alignItems='center' justifyContent='center'>
+        <Link href="#" arrow="right">
+          Learn
+        </Link>
+        <Spacer size={3} />
+        <Link href="#" arrow="right">
+          Shop
+        </Link>
+      </View>
+    </View>
   )
 };
 
