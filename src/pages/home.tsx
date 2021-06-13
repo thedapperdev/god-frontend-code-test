@@ -8,11 +8,8 @@ interface Props {
   cars?: Car[]
 }
 
-const Home: React.FC<Props> = () => {
-  const [car] = carsData;
-  return (
-    <CarBlock {...car} />
-  );
+const Home: any = () => {
+  return carsData.map(c => <CarBlock {...c} />)
 }
 
 export default Home;
