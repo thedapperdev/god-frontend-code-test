@@ -36,18 +36,26 @@ const H3 = (props: any) => {
   </Text>
 };
 
+const TitleView = styled(View)`
+  flex-direction: column;
+  ${props => props.theme.breakpoints.fromL} {
+    flex-direction: row;
+    align-items: center;
+  }
+`;
 
 const Car: React.FC<Props> = (props: Props) => {
   const altText = `${props.modelName} ${props.modelType} ${props.bodyType}`;
 
+  const theme = useTheme();
   return (
     <View justifyContent='flex-start' extend={{ margin: '0 15px' }}>
       <H3>{props.bodyType}</H3>
-      <View direction='row' alignItems='center'>
+      <TitleView theme={theme}>
         <H1>{props.modelName}</H1>
         <Spacer />
         <H2>{props.modelType}</H2>
-      </View>
+      </TitleView>
       <Spacer />
       <View >
         <img src={props.imageUrl} alt={altText} />

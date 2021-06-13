@@ -20,10 +20,13 @@ const BaseNavButtonStyles = css`
   width: 3.5rem;
   background-color: transparent;
   border: none;
+  &:disabled {
+    opacity: 0.6;
+  }
 `;
 
 const BackButton = styled(ButtonBack)`
-  ${BaseNavButtonStyles};
+  ${BaseNavButtonStyles}
   svg {
     transform: rotate(180deg);
   }
