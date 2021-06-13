@@ -25,8 +25,8 @@ const RESPONSIVE_CAROUSEL = {
     step: 1,
     visibleSlides: 1,
     dots: true,
-    naturalSlideWidth: 80,
-    naturalSlideHeight: 72,
+    naturalSlideWidth: 95,
+    naturalSlideHeight: 85,
   },
   large: {
     step: 4,

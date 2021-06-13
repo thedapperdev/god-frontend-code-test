@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 // @ts-ignore
-import { CarouselProvider, Slider, Slide as PureSlide, ButtonBack, ButtonNext, CarouselProviderProps } from 'pure-react-carousel';
+import { CarouselProvider, Slider, Slide as PureSlide, ButtonBack, ButtonNext, CarouselProviderProps, DotGroup } from 'pure-react-carousel';
 // @ts-ignore
 import { useOnWindowResize } from 'rooks';
 
@@ -85,6 +85,40 @@ const getResponsiveProps = (breakpoints: IThemeBreakpoints, responsiveProps: IRe
   return responsiveProps.small;
 }
 
+const CarouselNavigationButtons = () => {
+  return (
+    <View direction='row' justifyContent='flex-end'>
+      <CarouselButton back>Back</CarouselButton>
+      <CarouselButton>Next</CarouselButton>
+      <Spacer size={2} />
+    </View>
+  );
+};
+
+const StyledDotGroup = styled(DotGroup)`
+  button {
+    height: 10px;
+    width: 10px;
+    margin: 0 5px;
+    padding: 0;
+    
+    border-radius: 50px;
+    border: none;
+    background-color: ${props => props.theme.color.ornament};
+    &:disabled {
+      background-color: ${props => props.theme.color.foreground.primary};
+    }
+  }
+`;
+
+const NavigationDots = () => {
+  const theme = useTheme();
+  return (
+    <View direction='row' justifyContent='center'>
+      <StyledDotGroup theme={theme} />
+    </View>
+  )
+}
 
 export const Provider: React.FC<ICarouselProvider> = ({ children, responsive, ...props }: ICarouselProvider) => {
   const { breakpoint } = useTheme();
@@ -103,11 +137,7 @@ export const Provider: React.FC<ICarouselProvider> = ({ children, responsive, ..
         {...responsiveProps}>
         <View>
           {children}
-          <View direction='row' justifyContent='flex-end'>
-            <CarouselButton back>Back</CarouselButton>
-            <CarouselButton>Next</CarouselButton>
-            <Spacer size={2} />
-          </View>
+          {responsiveProps.dots ? <NavigationDots /> : <CarouselNavigationButtons />}
         </View>
       </StyledCarouselProvider>
   )
