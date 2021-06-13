@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { css } from 'styled-components';
 // @ts-ignore
 import { CarouselProvider, Slider, Slide as PureSlide, ButtonBack, ButtonNext, CarouselProviderProps } from 'pure-react-carousel';
@@ -53,15 +53,18 @@ interface IResponsiveSize {
   dots: Boolean,
   step: number,
   visibleSlides: number,
+  naturalSlideHeight: number,
+  naturalSlideWidth: number
 }
 
 interface IResponsiveSlides {
+  small: IResponsiveSize,
   medium: IResponsiveSize,
   large: IResponsiveSize,
 }
 
 
-interface ICarouselProvider extends Omit<CarouselProviderProps, 'visibleSlides'> {
+interface ICarouselProvider extends Omit<CarouselProviderProps, 'visibleSlides'|'naturalSlideHeight'|'naturalSlideWidth'> {
   responsive: IResponsiveSlides
 }
 
@@ -76,28 +79,28 @@ const getResponsiveProps = (breakpoints: IThemeBreakpoints, responsiveProps: IRe
   if (outerWidth >= parsedBreakpoints.large) {
     return responsiveProps.large;
   }
-  return responsiveProps.medium;
+  if (outerWidth >= parsedBreakpoints.medium) {
+    return responsiveProps.medium;
+  }
+  return responsiveProps.small;
 }
 
 
 export const Provider: React.FC<ICarouselProvider> = ({ children, responsive, ...props }: ICarouselProvider) => {
   const { breakpoint } = useTheme();
   
-  const [ responsiveProps, setResponsiveProps ] = useState(responsive.medium); 
+  const [ responsiveProps, setResponsiveProps ] = useState(getResponsiveProps(breakpoint, responsive)); 
+
   useOnWindowResize(() => {
-    console.log('helew')
     setResponsiveProps(
       getResponsiveProps(breakpoint, responsive)
     )
-
   });
 
   return (
     <StyledCarouselProvider
         {...props}
-        {...responsiveProps}
-        naturalSlideWidth={100}
-        naturalSlideHeight={100}>
+        {...responsiveProps}>
         <View>
           {children}
           <View direction='row' justifyContent='flex-end'>

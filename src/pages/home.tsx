@@ -14,23 +14,32 @@ interface Props {
 }
 
 const RESPONSIVE_CAROUSEL = {
+  small: {
+    step: 1,
+    visibleSlides: 1,
+    dots: true,
+    naturalSlideWidth: 80,
+    naturalSlideHeight: 80,    
+  },
   medium: {
     step: 1,
     visibleSlides: 1,
     dots: true,
+    naturalSlideWidth: 80,
+    naturalSlideHeight: 72,
   },
   large: {
     step: 4,
     visibleSlides: 4,
     dots: false,
+    naturalSlideWidth: 100,
+    naturalSlideHeight: 120,
   },
 }
 
 const Home: any = () => {
   return (
       <CarouselProvider
-        naturalSlideWidth={100}
-        naturalSlideHeight={100}
         responsive={RESPONSIVE_CAROUSEL}
         totalSlides={carsData.length}>
           <Slider>

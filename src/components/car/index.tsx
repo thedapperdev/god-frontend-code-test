@@ -20,6 +20,7 @@ const H2 = (props: any) => {
   return <Text as='h2' extend={{
       color: theme.color.foreground.secondary,
       fontWeight: '400 !important',
+      textAlign: 'left',
       }}>
     {props.children}
   </Text>
