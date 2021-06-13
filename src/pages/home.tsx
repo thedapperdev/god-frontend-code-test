@@ -1,10 +1,11 @@
 import React from 'react';
+import { useOnWindowResize } from 'rooks';
 import CarBlock, { Props as Car } from '../components/car';
 // @ts-ignore
-import { View, Spacer } from 'vcc-ui';
-import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
-import 'pure-react-carousel/dist/react-carousel.es.css';
+import { Slider, Slide } from 'pure-react-carousel';
+import { Provider as CarouselProvider } from '../components/Carousel';
 
+import 'pure-react-carousel/dist/react-carousel.es.css';
 // @ts-ignore
 import carsData from '../cars.json';
 
@@ -12,15 +13,26 @@ interface Props {
   cars?: Car[]
 }
 
+const RESPONSIVE_CAROUSEL = {
+  medium: {
+    step: 1,
+    visibleSlides: 1,
+    dots: true,
+  },
+  large: {
+    step: 4,
+    visibleSlides: 4,
+    dots: false,
+  },
+}
+
 const Home: any = () => {
   return (
-    // <View direction='row'>
       <CarouselProvider
         naturalSlideWidth={100}
-        naturalSlideHeight={125}
-        visibleSlides={4}
-        totalSlides={carsData.length}
-        step={4}>
+        naturalSlideHeight={100}
+        responsive={RESPONSIVE_CAROUSEL}
+        totalSlides={carsData.length}>
           <Slider>
           {carsData.map((c, i) => {
             return (<Slide index={i}>
@@ -28,12 +40,7 @@ const Home: any = () => {
             </Slide>)
           })}
           </Slider>
-          <ButtonBack>Back</ButtonBack>
-        <ButtonNext>Next</ButtonNext>
       </CarouselProvider>
-      
-
-    // </View>
   )
 }
 
