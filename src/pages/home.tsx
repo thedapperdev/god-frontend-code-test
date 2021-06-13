@@ -1,7 +1,7 @@
 import React from 'react';
 import CarBlock, { Props as Car } from '../components/car';
 // @ts-ignore
-import { View } from 'vcc-ui';
+import { View, Spacer } from 'vcc-ui';
 import { CarouselProvider, Slider, Slide, ButtonBack, ButtonNext } from 'pure-react-carousel';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 

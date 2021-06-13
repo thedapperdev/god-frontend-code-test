@@ -40,7 +40,7 @@ const Car: React.FC<Props> = (props: Props) => {
   const altText = `${props.modelName} ${props.modelType} ${props.bodyType}`;
 
   return (
-    <View justifyContent='flex-start'>
+    <View justifyContent='flex-start' extend={{ margin: '0 15px' }}>
       <H3>{props.bodyType}</H3>
       <View direction='row' alignItems='center'>
         <H1>{props.modelName}</H1>
