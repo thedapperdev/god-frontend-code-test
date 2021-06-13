@@ -57,8 +57,7 @@ interface IResponsiveSize {
 
 interface IResponsiveSlides {
   medium: IResponsiveSize,
-  large?: IResponsiveSize,
-  'x-large'?: IResponsiveSize,
+  large: IResponsiveSize,
 }
 
 
@@ -71,14 +70,11 @@ interface IThemeBreakpoints { size: { medium: string, large: string, 'x-large': 
 
 
 const getResponsiveProps = (breakpoints: IThemeBreakpoints, responsiveProps: IResponsiveSlides): IResponsiveSize  => {
+  console.log({responsiveProps})
   const parsedBreakpoints = mapValues(breakpoints.size, v => parseInt(v));
-  const { documentElement: { clientWidth: windowWidth } } = document;
-  if (windowWidth > parsedBreakpoints.medium && windowWidth < parsedBreakpoints['x-large']) {
-    return responsiveProps.large || responsiveProps.medium;
-  }
-
-  if (windowWidth <= parsedBreakpoints['x-large']) {
-    return responsiveProps['x-large'] || responsiveProps.large || responsiveProps.medium;
+  const { outerWidth } = window;
+  if (outerWidth >= parsedBreakpoints.large) {
+    return responsiveProps.large;
   }
   return responsiveProps.medium;
 }
@@ -88,10 +84,14 @@ export const Provider: React.FC<ICarouselProvider> = ({ children, responsive, ..
   const { breakpoint } = useTheme();
   
   const [ responsiveProps, setResponsiveProps ] = useState(responsive.medium); 
-  useOnWindowResize(() => setResponsiveProps(
-    getResponsiveProps(breakpoint, responsive)
-  ));
-  console.log(responsiveProps.visibleSlides, 'VIZ SLIDEZ')
+  useOnWindowResize(() => {
+    console.log('helew')
+    setResponsiveProps(
+      getResponsiveProps(breakpoint, responsive)
+    )
+
+  });
+
   return (
     <StyledCarouselProvider
         {...props}

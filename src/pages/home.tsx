@@ -35,7 +35,7 @@ const Home: any = () => {
         totalSlides={carsData.length}>
           <Slider>
           {carsData.map((c, i) => {
-            return (<Slide index={i}>
+            return (<Slide index={i} key={`${c.id}-${i}`}>
               <CarBlock  {...c} />
             </Slide>)
           })}
