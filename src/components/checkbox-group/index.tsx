@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 // @ts-ignore
-import { View, Spacer, Checkbox } from 'vcc-ui';
+import { Spacer, Checkbox } from 'vcc-ui';
 
 
 export interface ICheckboxGroupItem {
@@ -13,7 +13,7 @@ export interface ICheckboxGroups {
   onChange: Function,
 }
 
-const CheckboxGroup = ({ items, onChange }: ICheckboxGroups) => {
+const CheckboxGroup = ({ items, onChange, ...props }: ICheckboxGroups) => {
   const [
     selected,
     setSelected,
@@ -37,11 +37,11 @@ const CheckboxGroup = ({ items, onChange }: ICheckboxGroups) => {
   }
 
 
-  return <View direction='row'>
+  return <>
       {selected.map(
         (item: ICheckboxGroupItem, i: number) => {
           return (
-            <>
+            <React.Fragment key={`checkbox-${i}`}>
               <Spacer key={`spacer-${i}`} />
               <Checkbox
                 label={item.name}
@@ -49,11 +49,11 @@ const CheckboxGroup = ({ items, onChange }: ICheckboxGroups) => {
                 value={item.name}
                 checked={item.checked}
                 onChange={() => handleChange({...item, checked: !item.checked})} />
-              </>
+              </React.Fragment>
             )
         },
       )}
-      </View>;
+      </>;
 }
 
 export default CheckboxGroup;

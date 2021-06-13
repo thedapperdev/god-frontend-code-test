@@ -10,7 +10,7 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import carsData from '../cars.json';
 import { uniqBy } from 'lodash';
 // @ts-ignore
-import { View } from 'vcc-ui';
+import { View, Spacer } from 'vcc-ui';
 
 const RESPONSIVE_CAROUSEL = {
   small: {
@@ -61,7 +61,11 @@ const Home: React.FC = () => {
 
   return (
       <View>
-        <CheckboxGroup items={bodyTypes} onChange={setFilter} />
+        <Spacer size={3} />
+        <View direction='row' justifyContent='center'>
+          <CheckboxGroup items={bodyTypes} onChange={setFilter} />
+        </View>
+        <Spacer size={3} />
         <CarouselProvider
         responsive={RESPONSIVE_CAROUSEL}
         totalSlides={viewableCars.length}>

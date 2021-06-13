@@ -47,10 +47,9 @@ const getResponsiveProps = (breakpoints: IThemeBreakpoints, responsiveProps: IRe
 }
 
 
-
-
 export const Provider: React.FC<ICarouselProvider> = ({ children, responsive, ...props }: ICarouselProvider) => {
   const { breakpoint } = useTheme();
+
   
   const [ {dots, ...responsiveProps}, setResponsiveProps ] = useState(getResponsiveProps(breakpoint, responsive)); 
 

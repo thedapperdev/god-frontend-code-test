@@ -8,10 +8,14 @@ interface Props {
 
 const H1: React.FC<Props> = (props: Props) => {
   return (
-    <Text variant="hillary" subStyle="emphasis" as='h1' extend={{ textAlign: 'left' }}>
-      {props.children}
+    <Text
+      variant="hillary"
+      subStyle="emphasis"
+      as='h1'
+      extend={{ textAlign: 'left' }}>
+        {props.children}
     </Text>
-  )
+  );
 }
 
 export default H1;
