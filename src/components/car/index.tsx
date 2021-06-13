@@ -1,40 +1,20 @@
 import React from 'react';
 import H1 from '../H1';
+import H2 from '../H2';
+import H3 from '../H3';
 
 // @ts-ignore
-import { Text, useTheme, Link, Spacer, View } from 'vcc-ui';
+import { useTheme, Link, Spacer, View } from 'vcc-ui';
 // @ts-ignore
 import styled from 'styled-components';
 
-export interface Props {
+export interface ICar {
   id?: string
   modelName: string
   bodyType: string
   modelType: string
   imageUrl: string
 }
-
-const H2 = (props: any) => {
-  const theme = useTheme();
-  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-  return <Text as='h2' extend={{
-      color: theme.color.foreground.secondary,
-      fontWeight: '400 !important',
-      textAlign: 'left',
-      }}>
-    {props.children}
-  </Text>
-}
-const H3 = (props: any) => {
-  const theme = useTheme();
-  return <Text as='h3' extend={{
-      textTransform: 'uppercase',
-      color: theme.color.foreground.secondary,
-      fontWeight: '500 !important',
-      textAlign: 'left' }}>
-    {props.children}
-  </Text>
-};
 
 const TitleView = styled(View)`
   flex-direction: column;
@@ -44,7 +24,7 @@ const TitleView = styled(View)`
   }
 `;
 
-const Car: React.FC<Props> = (props: Props) => {
+const Car: React.FC<ICar> = (props: ICar) => {
   const altText = `${props.modelName} ${props.modelType} ${props.bodyType}`;
 
   const theme = useTheme();

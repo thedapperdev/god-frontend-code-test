@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import CarBlock, { Props as Car } from '../components/car';
+import CarBlock, { ICar } from '../components/car';
 // @ts-ignore
 import { Slider, Slide } from 'pure-react-carousel';
 import { Provider as CarouselProvider } from '../components/Carousel';
@@ -55,7 +55,7 @@ const Home: React.FC = () => {
       .map((c: ICheckboxGroupItem) => c.name);
     
     setViewableCars(
-      carsData.filter((car: Car) => filteredTypes.includes(car.bodyType))
+      carsData.filter((car: ICar) => filteredTypes.includes(car.bodyType))
     )
   }
 

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 // @ts-ignore
-import { CarouselProvider, CarouselProviderProps, DotGroup } from 'pure-react-carousel';
+import { CarouselProvider, CarouselProviderProps } from 'pure-react-carousel';
 // @ts-ignore
 import { useOnWindowResize } from 'rooks';
 
