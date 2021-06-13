@@ -76,7 +76,6 @@ interface IThemeBreakpoints { size: { medium: string, large: string, 'x-large': 
 
 
 const getResponsiveProps = (breakpoints: IThemeBreakpoints, responsiveProps: IResponsiveSlides): IResponsiveSize  => {
-  console.log({responsiveProps})
   const parsedBreakpoints = mapValues(breakpoints.size, v => parseInt(v));
   const { outerWidth } = window;
   if (outerWidth >= parsedBreakpoints.large) {
