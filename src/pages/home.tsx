@@ -1,20 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { useOnWindowResize } from 'rooks';
+import React, { useState } from 'react';
 import CarBlock, { Props as Car } from '../components/car';
 // @ts-ignore
 import { Slider, Slide } from 'pure-react-carousel';
 import { Provider as CarouselProvider } from '../components/Carousel';
+import CheckboxGroup, { ICheckboxGroupItem } from '../components/checkbox-group';
 
 import 'pure-react-carousel/dist/react-carousel.es.css';
 // @ts-ignore
 import carsData from '../cars.json';
 import { uniqBy } from 'lodash';
 // @ts-ignore
-import { Checkbox, View, Spacer } from 'vcc-ui';
-
-interface Props {
-  cars?: Car[]
-}
+import { View } from 'vcc-ui';
 
 const RESPONSIVE_CAROUSEL = {
   small: {
@@ -40,53 +36,10 @@ const RESPONSIVE_CAROUSEL = {
   },
 }
 
-const FilterCheckboxes = ({ items, onChange, ...props }: { items: { name: string, checked: boolean}[], onChange: Function }) => {
-
-  const [
-    selected,
-    setSelected,
-  ] = useState<{ name: string, checked: boolean}[]>(
-    items,
-  );
-  
 
 
-  const handleChange = (checkbox: any) => {
-    const newState = [
-      ...selected,
-    ];
-    const recordNo: number = selected.findIndex(
-      (bodyTypes: any) => bodyTypes.name === checkbox.name,
-    );
-    if (recordNo !== -1) {
-      newState[recordNo] = checkbox;
-      setSelected(newState);
-      onChange(newState);
-    }
-  }
-
-
-  return <View direction='row'>
-      {selected.map(
-        (item, i: number) => {
-          return (
-            <>
-              <Spacer key={`spacer-${i}`} />
-              <Checkbox
-                label={item.name}
-                key={`${i}-car`}
-                value={item.name}
-                checked={item.checked}
-                onChange={() => handleChange({...item, checked: !item.checked})} />
-              </>
-            )
-        },
-      )}
-      </View>;
-}
-
-const Home: any = () => {
-  const bodyTypes: any[] = uniqBy(
+const Home: React.FC = () => {
+  const bodyTypes: ICheckboxGroupItem[] = uniqBy(
     carsData.map(c => ({
       name: c.bodyType,
       checked: true,
@@ -96,10 +49,10 @@ const Home: any = () => {
 
   const [viewableCars, setViewableCars] = useState(carsData);
 
-  const setFilter = (checkboxState: any) => {
+  const setFilter = (checkboxState: ICheckboxGroupItem[]) => {
     const filteredTypes = checkboxState
-      .filter((cbs: any) => cbs.checked)
-      .map((c: any) => c.name);
+      .filter((cbs: ICheckboxGroupItem) => cbs.checked)
+      .map((c: ICheckboxGroupItem) => c.name);
     
     setViewableCars(
       carsData.filter((car: Car) => filteredTypes.includes(car.bodyType))
@@ -108,7 +61,7 @@ const Home: any = () => {
 
   return (
       <View>
-        <FilterCheckboxes items={bodyTypes} onChange={setFilter} />
+        <CheckboxGroup items={bodyTypes} onChange={setFilter} />
         <CarouselProvider
         responsive={RESPONSIVE_CAROUSEL}
         totalSlides={viewableCars.length}>
