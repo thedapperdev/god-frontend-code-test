@@ -8,7 +8,7 @@ interface Props {
 
 const H1: React.FC<Props> = (props: Props) => {
   return (
-    <Text variant="hillary" subStyle="emphasis">
+    <Text variant="hillary" subStyle="emphasis" as='h1'>
       {props.children}
     </Text>
   )
