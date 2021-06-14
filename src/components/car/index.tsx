@@ -43,11 +43,11 @@ const Car: React.FC<ICar> = (props: ICar) => {
         <Image src={props.imageUrl} alt={altText} hasMasterSpinner={true} />
       </View>
       <View direction='row' alignItems='center' justifyContent='center'>
-        <Link href="#" arrow="right">
+        <Link href={`/learn/${props.id}`} arrow="right">
           Learn
         </Link>
         <Spacer size={3} />
-        <Link href="#" arrow="right">
+        <Link href={`/shop/${props.id}`} arrow="right">
           Shop
         </Link>
       </View>
