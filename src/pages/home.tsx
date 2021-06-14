@@ -17,15 +17,15 @@ const RESPONSIVE_CAROUSEL = {
     step: 1,
     visibleSlides: 1,
     dots: true,
-    naturalSlideWidth: 80,
-    naturalSlideHeight: 80,    
+    naturalSlideWidth: 90,
+    naturalSlideHeight: 100,    
   },
   medium: {
     step: 1,
     visibleSlides: 1,
     dots: true,
     naturalSlideWidth: 100,
-    naturalSlideHeight: 95,
+    naturalSlideHeight: 100,
   },
   large: {
     step: 4,

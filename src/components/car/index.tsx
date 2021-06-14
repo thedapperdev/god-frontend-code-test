@@ -2,6 +2,8 @@ import React from 'react';
 import H1 from '../H1';
 import H2 from '../H2';
 import H3 from '../H3';
+import { Image } from 'pure-react-carousel';
+
 
 // @ts-ignore
 import { useTheme, Link, Spacer, View } from 'vcc-ui';
@@ -38,7 +40,7 @@ const Car: React.FC<ICar> = (props: ICar) => {
       </TitleView>
       <Spacer />
       <View >
-        <img src={props.imageUrl} alt={altText} />
+        <Image src={props.imageUrl} alt={altText} hasMasterSpinner={true} />
       </View>
       <View direction='row' alignItems='center' justifyContent='center'>
         <Link href="#" arrow="right">
